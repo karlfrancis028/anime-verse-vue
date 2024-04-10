@@ -1,0 +1,14 @@
+$spaces: (
+  'xxl': 3rem,
+  'xl': 2.5rem,
+  'l': 2rem,
+  'm': 1.5rem,
+  'base': 1rem,
+  's': .75rem,
+  'xs': .5rem,
+  'xxs': .25rem,
+);
+
+@function space($name) {
+  @return map-get($spaces, $name);
+};

@@ -1,0 +1,82 @@
+.nav {
+  @extend %flex-row--center-y, %flex-row--between;
+  height: 3.5rem;
+
+  &.container {
+    position: relative;
+  }
+
+  &__logo {
+    color: var(--title-color);
+    font-weight: font(font-medium);
+    text-decoration: none;
+    cursor: pointer;
+
+    &:hover {
+      color: var(--first-color);
+    }
+  }
+
+  &__list {
+    @extend %flex-row--center-y;
+    gap: space(l);
+
+    @media only screen and (max-width: 886px) {
+      flex-direction: column;
+      position: fixed;
+      width: 100%;
+      height: 100vh;
+      top: 3.5rem;
+      left: 0;
+      padding: space(base);
+      background-color: var(--body-color);
+      z-index: z-index(z-fixed);
+
+      &.hidden {
+        display: none;
+      }
+    }
+
+  }
+
+  &__item {
+    cursor: pointer;
+
+    &:hover,
+    &.active {
+      p {
+        color: var(--first-color);
+      }
+    }
+
+    p {
+      @extend %flex-col--center-x;
+      font-size: font(normal-font-size);
+      color: var(--title-color);
+      font-weight: font(font-medium);
+    }
+
+  }
+
+  &__actions {
+    @extend %flex-row--center-y;
+    gap: space(base);
+
+    svg {
+      cursor: pointer;
+      color: var(--title-color);
+
+      &:hover {
+        color: var(--first-color);
+      }
+    }
+  }
+
+  &__toggle {
+    display: none;
+
+    @media only screen and (max-width: 886px) {
+      display: block;
+    }
+  }
+}

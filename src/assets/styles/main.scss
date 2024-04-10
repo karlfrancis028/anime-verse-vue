@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import "./configs/utils";
+@import "./components/index";
+
+:root {
+  --hue-color: 150;
+
+  --first-color: hsl(var(--hue-color), 69%, 61%);
+  --first-color-second: hsl(var(--hue-color), 69%, 61%);
+  --first-color-alt: hsl(var(--hue-color), 57%, 53%);
+  --first-color-lighter: hsl(var(--hue-color), 92%, 85%);
+  --title-color: hsl(var(--hue-color), 8%, 15%);
+  --title-color-invert: hsl(var(--hue-color), 8%, 95%);
+  --text-color: hsl(var(--hue-color), 8%, 45%);
+  --text-color-light: hsl(var(--hue-color), 8%, 65%);
+  --input-color: hsl(var(--hue-color), 70%, 96%);
+  --body-color: hsl(var(--hue-color), 60%, 99%);
+  --body-color-invert: hsl(var(--hue-color), 28%, 12%);
+  --card-color: #e7e7e7;
+  --btn-color: #acacac;
+  --btn-color-hover: #b3b3b3;
+  --scroll-bar-color: hsl(var(--hue-color), 12%, 90%);
+  --scroll-thumb-color: hsl(var(--hue-color), 12%, 80%);
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: $body-font;
+}
+
+h1 {
+  font-size: font(h1-font-size);
+}
+
+h2 {
+  font-size: font(h2-font-size);
+}
+
+h3 {
+  font-size: font(h3-font-size);
+}
+
+.container {
+  max-width: 1050px;
+  margin: 0 auto;
+
+  @media only screen and (max-width: 1080px) {
+    margin: 0 space(m);
+  }
+
+  @media only screen and (max-width: 350px) {
+    margin: 0 space(base);
+  }
+}
+
+body {
+  background-color: var(--body-color);
+  
+  &.dark-theme{
+    --first-color-second: hsl(var(--hue-color), 30%, 8%);
+    --title-color: hsl(var(--hue-color), 8%, 95%);
+    --title-color-invert: hsl(var(--hue-color), 8%, 15%);
+    --text-color: hsl(var(--hue-color), 8%, 75%);
+    --input-color: hsl(var(--hue-color), 29%, 16%);
+    --body-color: hsl(var(--hue-color), 28%, 12%);
+    --body-color-invert: hsl(var(--hue-color), 60%, 99%);
+    --card-color: hsl(var(--hue-color), 29%, 16%);
+    --btn-color: hsl(var(--hue-color), 29%, 50%);
+    --btn-color-hover: hsl(var(--hue-color), 29%, 60%);
+    --scroll-bar-color: hsl(var(--hue-color), 12%, 48%);
+    --scroll-thumb-color: hsl(var(--hue-color), 12%, 36%);
+  }
+}

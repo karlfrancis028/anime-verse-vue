@@ -1,0 +1,28 @@
+.my-btn {
+  @extend %flex-row--center-xy;
+  min-width: 80px;
+  gap: 6px;
+  padding: 4px 8px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: var(--first-color-alt);
+
+  &:hover {
+    background-color: var(--first-color);
+  }
+
+  &.right {
+    flex-direction: row-reverse !important;
+  }
+
+  svg {
+    color: #fff;
+  }
+
+  p {
+    font-size: font(h3-font-size);
+    font-weight: font(font-medium);
+    color: #fff;
+  }
+}
