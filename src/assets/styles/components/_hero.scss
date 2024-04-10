@@ -6,16 +6,16 @@
   border-radius: 10px;
   overflow: hidden;
 
-  @media only screen and (max-width: 679px) {
+  @media only screen and (max-width: 768px) {
     flex-direction: column;
     align-items: center;
   }
 
   &__img {
-    width: 300px;
+    width: 400px;
 
-    @media only screen and (max-width: 679px) {
-      width: 100%;
+    @media only screen and (max-width: 768px) {
+      width: 320px;
     }
   }
 
@@ -34,7 +34,7 @@
       font-size: font(normal-font-size);
       color: var(--title-color);
 
-      @media only screen and (max-width: 679px) {
+      @media only screen and (max-width: 886px) {
         font-size: font(smaller-font-size);
       }
     }
@@ -44,7 +44,7 @@
       font-size: font(normal-font-size);
       color: var(--title-color);
 
-      @media only screen and (max-width: 679px) {
+      @media only screen and (max-width: 886px) {
         font-size: font(smaller-font-size);
       }
     }
@@ -55,8 +55,12 @@
         font-size: font(normal-font-size);
         color: var(--title-color);
   
-        @media only screen and (max-width: 679px) {
+        @media only screen and (max-width: 886px) {
           font-size: font(smaller-font-size);
+        }
+
+        &:hover {
+          color: unset;
         }
       }
     }
