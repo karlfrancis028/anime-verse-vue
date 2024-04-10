@@ -4,5 +4,9 @@
     padding: space(base);
     min-height: 90vh;
     margin-top: space(base);
+
+    @media only screen and (max-width: 600px) {
+      padding: 0;
+    }
   }
 }

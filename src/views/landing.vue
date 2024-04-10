@@ -23,7 +23,7 @@
 <template>
   <p v-if="topAnimes.length <= 0">Loading...</p>
   <one-col-layout v-else class="landing">
-    <hero :image="topAnimes[0].images.jpg.image_url"
+    <hero :image="topAnimes[0].images.jpg.large_image_url"
           :title="topAnimes[0].title"
           :description="topAnimes[0].synopsis"
           :type="topAnimes[0].type"

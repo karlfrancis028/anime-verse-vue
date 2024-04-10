@@ -31,7 +31,14 @@
         <h1 class="heading">{{ title }}</h1>
         <p class="subheading">{{ computedTypeAndYearDisplay }}</p>
       </div>
-      <p class="hero__info--description">{{ description }}</p>
+      <truncate-read-more :truncate-value="500"
+                          :only-if-more-than-value="275">
+        <template #html>
+          <p class="hero__info--description">
+            {{ description }}
+          </p>
+        </template>
+      </truncate-read-more>
       <p class="hero__info--summary">{{ computedGenreDisplay }}</p>
       <div class="hero__actions">
         <slot name="actions"></slot>
