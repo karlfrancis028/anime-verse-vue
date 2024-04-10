@@ -19,6 +19,8 @@
   });
 
   const computedTypeAndYearDisplay = computed(() => {
+    if (!props.year) return props.type;
+
     return `${props.type} (${props.year})`;
   })
 </script>
