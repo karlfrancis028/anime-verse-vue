@@ -1,6 +1,6 @@
 .hero {
   @extend %flex-row--center-x;
-  max-width: calc(1050px - 50px);
+  width: calc(1050px - 50px);
   margin: 0 auto;
   background-color: var(--card-color);
   border-radius: 10px;

@@ -76,6 +76,7 @@ body {
 }
 
 .carousel {
+  text-align: unset !important;
   
   &__track {
     align-items: flex-start;
