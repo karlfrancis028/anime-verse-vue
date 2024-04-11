@@ -1,7 +1,9 @@
 import '@/assets/styles/main.scss';
 import Components from '@/components/index';
 
+import 'vue3-carousel/dist/carousel.css'
 import TruncateReadMore from 'vue-truncate-read-more';
+import { Carousel, Slide } from 'vue3-carousel'
 
 import { createApp } from 'vue';
 import { createPinia } from 'pinia';
@@ -16,6 +18,8 @@ Object.keys(Components).forEach((key) => {
 });
 
 app.use(TruncateReadMore);
+app.use(Carousel);
+app.use(Slide);
 
 app.use(createPinia());
 app.use(router);

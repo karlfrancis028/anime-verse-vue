@@ -74,3 +74,10 @@ body {
     --scroll-thumb-color: hsl(var(--hue-color), 12%, 36%);
   }
 }
+
+.carousel {
+  
+  &__track {
+    align-items: flex-start;
+  }
+}
