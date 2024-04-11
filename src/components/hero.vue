@@ -7,7 +7,7 @@
     description: string;
     type: string;
     genres: Record<string, any>[];
-    year: number;
+    year: number | null;
   }
 
   const props = defineProps<HeroProps>();
@@ -33,7 +33,7 @@
         <h1 class="heading">{{ title }}</h1>
         <p class="subheading">{{ computedTypeAndYearDisplay }}</p>
       </div>
-      <truncate-read-more :truncate-value="500"
+      <truncate-read-more :truncate-value="700"
                           :only-if-more-than-value="275">
         <template #html>
           <p class="hero__info--description">
