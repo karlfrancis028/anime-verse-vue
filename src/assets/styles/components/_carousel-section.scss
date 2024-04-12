@@ -1,6 +1,26 @@
 .carousel-section {
-  &__title {
+
+  &__header {
+    @extend %flex-row--center-y, %flex-row--between;
     margin-bottom: space(base);
+    padding: 0 space(base);
+
+    @media only screen and (max-width: 456px) {
+      padding: 0;
+    }
+  }
+
+  &__title {
     color: var(--title-color);
+  }
+
+  &__actions {
+    @extend %flex-row--center-x;
+    gap: space(xs);
+
+    svg {
+      color: var(--title-color);
+      cursor: pointer;
+    }
   }
 }

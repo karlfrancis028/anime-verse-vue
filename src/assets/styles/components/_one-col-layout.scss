@@ -1,6 +1,9 @@
 .one-col-layout {
+  padding-bottom: space(base);
 
   &__content {
+    @extend %flex-col;
+    gap: space(base);
     padding: space(base);
     min-height: 90vh;
     margin-top: space(base);
