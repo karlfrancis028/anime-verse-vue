@@ -39,13 +39,16 @@
 <template>
   <div class="carousel-section">
     <div class="carousel-section__header">
-      <h2 class="carousel-section__title">{{ title }}</h2>
+      <div class="carousel-section__title">
+        <h2>{{ title }}</h2>
+        <p>View All</p>
+      </div>
       <div class="carousel-section__actions">
         <ph-caret-circle-left :size="30" weight="fill" @click="handlePrev"/>
         <ph-caret-circle-right :size="30" weight="fill" @click="handleNext"/>
       </div>
     </div>
-    <Carousel ref="carouselRef" :breakpoints="breakpoints">
+    <Carousel ref="carouselRef" :breakpoints="breakpoints" wrap-around>
       <Slide v-for="(option, index) in options" :key="index">
         <slot name="option" v-bind="{option}"></slot>
       </Slide>

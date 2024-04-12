@@ -11,7 +11,21 @@
   }
 
   &__title {
+    @extend %flex-row--center-y;
+    gap: space(base);
     color: var(--title-color);
+
+    p {
+      background-color: var(--btn-color);
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: font(smaller-font-size);
+      cursor: pointer;
+
+      &:hover {
+        background-color: var(--btn-color-hover);
+      }
+    }
   }
 
   &__actions {
@@ -21,6 +35,10 @@
     svg {
       color: var(--title-color);
       cursor: pointer;
+    }
+
+    @media only screen and (max-width: 456px) {
+      display: none;
     }
   }
 }
