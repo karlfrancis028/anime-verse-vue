@@ -8,7 +8,7 @@
   margin-bottom: space(base);
 
   @media only screen and (max-width: 456px) {
-    height: 230px;
+    height: 250px;
     width: 140px;
   }
 
@@ -27,5 +27,18 @@
     padding: 0 space(xs);
     color: var(--title-color);
     font-size: font(smaller-font-size);
+  }
+
+  &__title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;  
+    display: -webkit-box;
+    white-space: normal;
+    max-width: 100%;
+    max-height: 58px;
+    -webkit-line-clamp: 2;
+    line-height: 22px;
+    -webkit-box-orient: vertical;
   }
 }
