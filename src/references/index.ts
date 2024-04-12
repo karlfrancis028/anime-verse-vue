@@ -25,3 +25,12 @@ export enum TopAnimeAudienceRatings {
   R = 'r',
   RX = 'rx',
 };
+
+export enum SeasonUpcomingAnimeFilters {
+  TV = 'tv',
+  MOVIE = 'movie',
+  OVA = 'ova',
+  SPECIAL = 'special',
+  ONA = 'ona',
+  MUSIC = 'music',
+}

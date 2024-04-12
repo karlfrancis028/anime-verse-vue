@@ -1,18 +1,26 @@
 <script setup lang="ts">
-import { computed } from 'vue';
+  import { computed } from 'vue';
 
   interface SectionItemProps {
     image: string;
     title: string;
-    type: string;
-    genre: string;
+    type: string | null;
+    genres?: any[];
     year: number | null;
   }
 
   const props = defineProps<SectionItemProps>();
 
+  const computedGenres = computed(() => {
+    if (!props.genres?.length) return null;
+
+    return props.genres[0].name;
+  });
+
   const infoDisplay = computed(() => {
-  const infos = [props.type, props.genre, props.year].filter(info => info !== null && info !== undefined);
+    const infos = [props.type, computedGenres.value, props.year].filter(info => info !== null && info !== undefined);
+
+    if (infos.length === 0) return '-';
     
     return infos.join(' ~ ');
   });

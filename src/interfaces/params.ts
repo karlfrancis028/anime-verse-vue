@@ -2,6 +2,7 @@ import {
   TopAnimeTypes,
   TopAnimeFilters,
   TopAnimeAudienceRatings,
+  SeasonUpcomingAnimeFilters,
 } from '@/references/index';
 
 export interface TopAnimeParams {
@@ -12,3 +13,11 @@ export interface TopAnimeParams {
   page?: number,
   limit?: number,
 };
+
+export interface SeasonUpcomingAnimeParams {
+  filter?: SeasonUpcomingAnimeFilters,
+  sfw?: boolean,
+  unapproved?: boolean,
+  page?: number,
+  limit?: number,
+}

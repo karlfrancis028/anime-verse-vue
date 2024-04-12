@@ -9,48 +9,52 @@
   const animeStore = useAnimeStore();
   const { 
     topAnimes,
+    seasonUpcomingAnimes,
   } = storeToRefs(animeStore);
 
   const fetchTopTenAnimes = () => {
     animeStore.fetchTopAnimes({
       filter: TopAnimeFilters.AIRING,
+      sfw: true,
       limit: 10,
     });
   };
 
-  onMounted(() => fetchTopTenAnimes());
+  const fetchSeasonUpcomingAnimes = () => {
+    animeStore.fetchSeasonUpcomingAnimes({
+      unapproved: false,
+      sfw: true,
+      limit: 10,
+    });
+  };
+
+  onMounted(() => {
+    fetchTopTenAnimes();
+    fetchSeasonUpcomingAnimes();
+  });
 </script>
 
 <template>
   <p v-if="topAnimes.length <= 0">Loading...</p>
   <one-col-layout v-else class="landing">
-    <Carousel :autoplay="5000"
-              pause-autoplay-on-hover
-              wrap-around
-              class="landing__hero-carousel">
-      <Slide v-for="(anime, index) in topAnimes" :key="index">      
-        <hero :image="anime.images.jpg.large_image_url"
-              :title="anime.title"
-              :description="anime.synopsis"
-              :type="anime.type"
-              :genres="anime.genres"
-              :year="anime.year">
-          <template v-slot:actions>
-            <my-btn btn-text="Stream Now"
-                    btn-position="left" 
-                    :btn-icon="PhPlay" />
-          </template>
-        </hero>
-      </Slide>
-    </Carousel>
     <div class="landing__anime-sections">
+      <carousel-section title="Upcoming Animes"
+                        :options="seasonUpcomingAnimes">
+        <template v-slot:option="{option}">
+          <section-item :image="option.images.jpg.image_url" 
+                        :title="option.title"
+                        :type="option.type"
+                        :genres="option.genres"
+                        :year="option.year"/>
+        </template>
+      </carousel-section>
       <carousel-section title="Most Popular"
                         :options="topAnimes">
         <template v-slot:option="{option}">
           <section-item :image="option.images.jpg.image_url" 
                         :title="option.title"
                         :type="option.type"
-                        :genre="option.genres[0].name"
+                        :genres="option.genres"
                         :year="option.year"/>
         </template>
       </carousel-section>

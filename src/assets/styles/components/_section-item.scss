@@ -5,6 +5,7 @@
   background: var(--card-color);
   overflow: hidden;
   cursor: pointer;
+  margin-bottom: space(base);
 
   @media only screen and (max-width: 456px) {
     height: 230px;

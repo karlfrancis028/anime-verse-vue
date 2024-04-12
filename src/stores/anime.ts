@@ -1,4 +1,5 @@
 import type { 
+  SeasonUpcomingAnimeParams,
   TopAnimeParams 
 } from "@/interfaces/params";
 import { AnimeApi } from "@/services/anime";
@@ -7,6 +8,7 @@ import { ref } from "vue";
 
 export const useAnimeStore = defineStore('anime', () => {
   const topAnimes = ref<any[]>([]);
+  const seasonUpcomingAnimes = ref<any[]>([]);
 
   const fetchTopAnimes = async (queryParams?: TopAnimeParams) => {
     try {
@@ -19,8 +21,21 @@ export const useAnimeStore = defineStore('anime', () => {
     }
   };
 
+  const fetchSeasonUpcomingAnimes = async (queryParams?: SeasonUpcomingAnimeParams) => {
+    try {
+      const { data } = await AnimeApi.fetchSeasonUpcomingAnimes(queryParams);
+      if (data) {
+        seasonUpcomingAnimes.value = data.data;
+      }
+    } catch(error) {
+      console.error(error);
+    }
+  };
+
   return {
     topAnimes,
+    seasonUpcomingAnimes,
     fetchTopAnimes,
+    fetchSeasonUpcomingAnimes,
   };
 });

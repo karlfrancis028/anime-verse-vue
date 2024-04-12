@@ -1,8 +1,10 @@
 import axios from 'axios';
 import type { 
+  SeasonUpcomingAnimeParams,
   TopAnimeParams, 
 } from '@/interfaces/params';
 import type { 
+  SeasonUpcomingAnimeResponse,
   TopAnimeResponse, 
 } from '@/interfaces/responses';
 
@@ -14,6 +16,11 @@ export const AnimeApi = {
   },
   fetchTopAnimes: (queryParams?: TopAnimeParams) => {
     return axios.get<TopAnimeResponse>(`${ANIME_API}/top/anime`, {
+      params: queryParams,
+    });
+  },
+  fetchSeasonUpcomingAnimes: (queryParams?: SeasonUpcomingAnimeParams) => {
+    return axios.get<SeasonUpcomingAnimeResponse>(`${ANIME_API}/seasons/upcoming`, {
       params: queryParams,
     });
   },
