@@ -1,4 +1,5 @@
 .carousel-section {
+  margin: space(base) 0;
 
   &__header {
     @extend %flex-row--center-y, %flex-row--between;
