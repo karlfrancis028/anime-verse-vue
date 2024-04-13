@@ -39,12 +39,6 @@
           <p>Home</p>
         </div>
         <div class="nav__item">
-          <p>Updated</p>
-        </div>
-        <div class="nav__item">
-          <p>Ongoing</p>
-        </div>
-        <div class="nav__item">
           <p>Upcoming</p>
         </div>
         <div class="nav__item">
