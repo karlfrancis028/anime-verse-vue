@@ -31,14 +31,18 @@
     fetchTopTenAnimes();
     fetchSeasonUpcomingAnimes();
   });
+
+  const heroTitle = 'How will your journey begin? Step into the Animeverse!';
+
+  const heroDescription = 'Embark on an exhilarating odyssey through the boundless realms of Animeverse, where imagination knows no limits and every adventure awaits. Immerse yourself in a universe brimming with captivating stories, vibrant characters, and awe-inspiring worlds. Unleash your inner hero as you explore the vast landscapes of anime excellence. Your epic saga starts here in Animeverse.';
 </script>
 
 <template>
   <p v-if="topAnimes.length <= 0">Loading...</p>
   <one-col-layout v-else class="landing">
     <hero :image="HeroImage"
-          title="How will your journey begin? Step into the Animeverse!"
-          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat." />
+          :title="heroTitle"
+          :description="heroDescription" />
     <div class="landing__anime-sections">
       <carousel-section title="Upcoming Animes"
                         :options="seasonUpcomingAnimes">
