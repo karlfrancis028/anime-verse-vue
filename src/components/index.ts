@@ -4,6 +4,7 @@ import MyBtn from './my-btn.vue';
 import CarouselSection from './carousel-section.vue';
 import SectionItem from './section-item.vue';
 import Hero from './hero.vue';
+import SearchInput from './search-input.vue';
 
 export default {
   Navbar,
@@ -12,4 +13,5 @@ export default {
   CarouselSection,
   SectionItem,
   Hero,
+  SearchInput,
 }

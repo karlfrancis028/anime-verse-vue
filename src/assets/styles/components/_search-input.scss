@@ -1,0 +1,26 @@
+.search-input {
+  @extend %flex-row--center-y;
+  gap: space(xs);
+  background-color: var(--input-color);
+  padding: 6px 12px;
+  border-radius: 2px;
+
+  input {
+    background-color: transparent;
+    border: none;
+    color: var(--title-color);
+    flex-grow: 1;
+
+    &:focus {
+      outline: none;
+    }
+
+    &::placeholder {
+      color: var(--text-color);
+    }
+  }
+
+  svg {
+    color: var(--title-color);
+  }
+}

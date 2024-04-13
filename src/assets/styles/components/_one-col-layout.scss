@@ -1,12 +1,13 @@
 .one-col-layout {
-  padding-bottom: space(base);
+  @extend %flex-col;
+  gap: space(base);
+  padding: space(base) 0;
 
   &__content {
     @extend %flex-col;
     gap: space(base);
-    padding: space(base);
+    padding: 0 space(base);
     min-height: 90vh;
-    margin-top: space(base);
 
     @media only screen and (max-width: 600px) {
       padding: 0;
