@@ -6,3 +6,7 @@ export interface TopAnimeResponse {
 export interface SeasonUpcomingAnimeResponse extends TopAnimeResponse {
 
 };
+
+export interface AnimeGenreResponse {
+  data: object[],
+}

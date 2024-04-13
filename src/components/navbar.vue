@@ -43,6 +43,7 @@
     }
 
     $router.push(routeOptions);
+    showSideNav.value = false;
   };
 
   const isRouteActive = (route: Record<string, any>) => {

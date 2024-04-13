@@ -34,3 +34,10 @@ export enum SeasonUpcomingAnimeFilters {
   ONA = 'ona',
   MUSIC = 'music',
 }
+
+export enum AnimeGenreFilters {
+  GENRES = "genres",
+  EXPLICIT_GENRES = "explicit_genres",
+  THEMES = "themes",
+  DEMOGRAPHICS = "demographics",
+}
