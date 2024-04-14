@@ -1,0 +1,19 @@
+.section-list {
+  margin-top: space(s);
+
+  &__items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    justify-items: center;
+    row-gap: space(base);
+
+    @media only screen and (max-width: 447px) {
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      row-gap: 0;
+    }
+
+    @media only screen and (max-width: 331PX) {
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    }
+  }
+}

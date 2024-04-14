@@ -90,13 +90,6 @@
         type: 'popular',
       },
     },
-    {
-      label: 'Random',
-      path: '/view-all',
-      query: {
-        type: 'random',
-      },
-    },
   ];
 </script>
 

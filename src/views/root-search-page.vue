@@ -1,28 +1,63 @@
 <script setup lang="ts">
   import { useRoute } from 'vue-router';
-  import { computed, onMounted, ref } from 'vue';
+  import { computed, onMounted, ref, watch } from 'vue';
   import { useAnimeStore } from '@/stores/anime';
   import { storeToRefs } from 'pinia';
+  import { TopAnimeFilters } from '@/references';
+import { AnimeApi } from '@/services/anime';
 
   const animeStore = useAnimeStore();
   const { animeGenres } = storeToRefs(animeStore);
   const $route = useRoute();
   const searchString = ref<string>('');
   const selectedGenre = ref<string>('');
+  const animeList = ref<any[]>([]);
+  const pageNumber = ref<number>(1);
 
   const computedPageTitle = computed(() => {
-  if (typeof $route.query.type !== 'string' || !$route.query.type) return '';
+    if (typeof $route.query.type !== 'string' || !$route.query.type) return '';
     
     const pageTitles: {[key: string]: any} = {
       upcoming: 'Upcoming Animes',
       popular: 'Popular Animes',
-      random: 'Random Animes', 
     };
 
     return pageTitles[$route.query.type];
   });
 
-  onMounted(() => animeStore.fetchAnimeGenres());
+  const fetchDataFunction = () => {
+    if ($route.query.type === 'upcoming') {
+      return AnimeApi.fetchSeasonUpcomingAnimes({
+        unapproved: false,
+        sfw: true,
+        page: pageNumber.value,
+      });
+    } else {
+      return AnimeApi.fetchTopAnimes({
+        filter: TopAnimeFilters.AIRING,
+        sfw: true,
+        page: pageNumber.value,
+      });
+    }
+  }
+
+  const fetchAnimeList = async () => {
+    try {
+      const { data } = await fetchDataFunction();
+      if (data) {
+        animeList.value = data.data;
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  
+  watch(() => $route.query.type, () => fetchAnimeList());
+
+  onMounted(() => {
+    animeStore.fetchAnimeGenres();
+    fetchAnimeList();
+  });
 </script>
 
 <template>
@@ -39,7 +74,14 @@
         </div>
       </div>
     </template>
-    tet
+    <section-list>
+      <section-item v-for="(item, index) in animeList" :key="index"
+                    :image="item.images.jpg.image_url" 
+                    :title="item.title"
+                    :type="item.type"
+                    :genres="item.genres"
+                    :year="item.year"/>
+    </section-list>
   </one-col-layout>
 </template>
 
