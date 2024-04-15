@@ -11,25 +11,25 @@
     seasonUpcomingAnimes,
   } = storeToRefs(animeStore);
 
-  const fetchTopTenAnimes = () => {
-    animeStore.fetchTopAnimes({
+  const fetchTopTenAnimes = async () => {
+    await animeStore.fetchTopAnimes({
       filter: TopAnimeFilters.AIRING,
       sfw: true,
       limit: 10,
     });
   };
 
-  const fetchSeasonUpcomingAnimes = () => {
-    animeStore.fetchSeasonUpcomingAnimes({
+  const fetchSeasonUpcomingAnimes = async () => {
+    await animeStore.fetchSeasonUpcomingAnimes({
       unapproved: false,
       sfw: true,
       limit: 10,
     });
   };
 
-  onMounted(() => {
-    fetchTopTenAnimes();
-    fetchSeasonUpcomingAnimes();
+  onMounted(async () => {
+    await fetchTopTenAnimes();
+    await fetchSeasonUpcomingAnimes();
   });
 
   const heroTitle = 'How will your journey begin? Step into the Animeverse!';
@@ -38,8 +38,7 @@
 </script>
 
 <template>
-  <p v-if="topAnimes.length <= 0">Loading...</p>
-  <one-col-layout v-else class="landing">
+  <one-col-layout class="landing">
     <hero :image="HeroImage"
           :title="heroTitle"
           :description="heroDescription" />

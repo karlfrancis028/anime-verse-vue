@@ -7,6 +7,7 @@ import Hero from './hero.vue';
 import SearchInput from './search-input.vue';
 import MySelect from './my-select.vue';
 import SectionList from './section-list.vue';
+import BlockingLoader from './blocking-loader.vue';
 
 export default {
   Navbar,
@@ -18,4 +19,5 @@ export default {
   SearchInput,
   MySelect,
   SectionList,
+  BlockingLoader,
 }

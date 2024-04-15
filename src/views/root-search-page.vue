@@ -4,7 +4,7 @@
   import { useAnimeStore } from '@/stores/anime';
   import { storeToRefs } from 'pinia';
   import { TopAnimeFilters } from '@/references';
-import { AnimeApi } from '@/services/anime';
+  import { AnimeApi } from '@/services/anime';
 
   const animeStore = useAnimeStore();
   const { animeGenres } = storeToRefs(animeStore);
@@ -25,15 +25,15 @@ import { AnimeApi } from '@/services/anime';
     return pageTitles[$route.query.type];
   });
 
-  const fetchDataFunction = () => {
+  const fetchDataFunction = async () => {
     if ($route.query.type === 'upcoming') {
-      return AnimeApi.fetchSeasonUpcomingAnimes({
+      return await AnimeApi.fetchSeasonUpcomingAnimes({
         unapproved: false,
         sfw: true,
         page: pageNumber.value,
       });
     } else {
-      return AnimeApi.fetchTopAnimes({
+      return await AnimeApi.fetchTopAnimes({
         filter: TopAnimeFilters.AIRING,
         sfw: true,
         page: pageNumber.value,
@@ -52,11 +52,11 @@ import { AnimeApi } from '@/services/anime';
     }
   };
   
-  watch(() => $route.query.type, () => fetchAnimeList());
+  watch(() => $route.query.type, async () => await fetchAnimeList());
 
-  onMounted(() => {
-    animeStore.fetchAnimeGenres();
-    fetchAnimeList();
+  onMounted(async () => {
+    await animeStore.fetchAnimeGenres();
+    await fetchAnimeList();
   });
 </script>
 

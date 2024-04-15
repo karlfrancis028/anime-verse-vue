@@ -13,21 +13,21 @@ import type{
 const ANIME_API = `https://api.jikan.moe/v4`;
 
 export const AnimeApi = {
-  fetchAllAnime: () => {
-    return axios.get(`${ANIME_API}/anime`);
+  fetchAllAnime: async () => {
+    return await axios.get(`${ANIME_API}/anime`);
   },
-  fetchTopAnimes: (queryParams?: TopAnimeParams) => {
-    return axios.get<TopAnimeResponse>(`${ANIME_API}/top/anime`, {
+  fetchTopAnimes: async (queryParams?: TopAnimeParams) => {
+    return await axios.get<TopAnimeResponse>(`${ANIME_API}/top/anime`, {
       params: queryParams,
     });
   },
-  fetchSeasonUpcomingAnimes: (queryParams?: SeasonUpcomingAnimeParams) => {
-    return axios.get<SeasonUpcomingAnimeResponse>(`${ANIME_API}/seasons/upcoming`, {
+  fetchSeasonUpcomingAnimes: async (queryParams?: SeasonUpcomingAnimeParams) => {
+    return await axios.get<SeasonUpcomingAnimeResponse>(`${ANIME_API}/seasons/upcoming`, {
       params: queryParams,
     });
   },
-  fetchAnimeGenres: (queryParams?: AnimeGenreParams) => {
-    return axios.get<AnimeGenreResponse>(`${ANIME_API}/genres/anime`, {
+  fetchAnimeGenres: async (queryParams?: AnimeGenreParams) => {
+    return await axios.get<AnimeGenreResponse>(`${ANIME_API}/genres/anime`, {
       params: queryParams,
     });
   },
