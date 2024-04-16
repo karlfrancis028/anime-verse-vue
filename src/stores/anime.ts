@@ -6,13 +6,16 @@ import type {
 import { AnimeApi } from "@/services/anime";
 import { defineStore } from "pinia";
 import { ref } from "vue";
+import { useLoadingStore } from "./loading";
 
 export const useAnimeStore = defineStore('anime', () => {
   const topAnimes = ref<any[]>([]);
   const seasonUpcomingAnimes = ref<any[]>([]);
   const animeGenres = ref<any[]>([]);
+  const { toggleLoadingState } = useLoadingStore();
 
   const fetchTopAnimes = async (queryParams?: TopAnimeParams) => {
+    toggleLoadingState(true);
     try {
       const { data } = await AnimeApi.fetchTopAnimes(queryParams);
       if (data) {
@@ -20,10 +23,13 @@ export const useAnimeStore = defineStore('anime', () => {
       }
     } catch(error) {
       console.error(error);
+    } finally {
+      toggleLoadingState(false);
     }
   };
 
   const fetchSeasonUpcomingAnimes = async (queryParams?: SeasonUpcomingAnimeParams) => {
+    toggleLoadingState(true);
     try {
       const { data } = await AnimeApi.fetchSeasonUpcomingAnimes(queryParams);
       if (data) {
@@ -31,10 +37,13 @@ export const useAnimeStore = defineStore('anime', () => {
       }
     } catch(error) {
       console.error(error);
+    } finally {
+      toggleLoadingState(false);
     }
   };
 
   const fetchAnimeGenres = async (queryParams?: AnimeGenreParams) => {
+    toggleLoadingState(true);
     try {
       const { data } = await AnimeApi.fetchAnimeGenres(queryParams);
       if (data) {
@@ -42,6 +51,8 @@ export const useAnimeStore = defineStore('anime', () => {
       }
     } catch(error) {
       console.error(error);
+    } finally {
+      toggleLoadingState(false);
     }
   };
 

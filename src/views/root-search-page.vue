@@ -5,7 +5,10 @@
   import { storeToRefs } from 'pinia';
   import { TopAnimeFilters } from '@/references';
   import { AnimeApi } from '@/services/anime';
+  import { useLoadingStore } from '@/stores/loading';
 
+  const loadingStore = useLoadingStore();
+  const { loading } = storeToRefs(loadingStore);
   const animeStore = useAnimeStore();
   const { animeGenres } = storeToRefs(animeStore);
   const $route = useRoute();
@@ -61,7 +64,8 @@
 </script>
 
 <template>
-  <one-col-layout class="root-search-page">
+  <one-col-layout :is-loading="loading" 
+                  class="root-search-page">
     <template #toolbar>
       <div class="root-search-page__toolbar">
         <h3 class="root-search-page__title">{{ computedPageTitle }}</h3>

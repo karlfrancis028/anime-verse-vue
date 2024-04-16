@@ -4,7 +4,10 @@
   import { TopAnimeFilters } from '@/references';
   import { storeToRefs } from 'pinia';
   import HeroImage from '@/assets/hero-image.jpg';
+  import { useLoadingStore } from '@/stores/loading';
 
+  const loadingStore = useLoadingStore();
+  const { loading } = storeToRefs(loadingStore);
   const animeStore = useAnimeStore();
   const { 
     topAnimes,
@@ -38,7 +41,8 @@
 </script>
 
 <template>
-  <one-col-layout class="landing">
+  <one-col-layout :is-loading="loading"
+                  class="landing" >
     <hero :image="HeroImage"
           :title="heroTitle"
           :description="heroDescription" />
