@@ -94,7 +94,7 @@
 </script>
 
 <template>
-  <nav class="nav container">
+  <nav class="nav">
     <h2 class="nav__logo">AnimeVerse</h2>
     <div class="nav__menu">
       <div class="nav__list" 

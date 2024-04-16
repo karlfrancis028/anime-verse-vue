@@ -3,6 +3,5 @@
 </script>
 
 <template>
-  <navbar />
   <RouterView />
 </template>

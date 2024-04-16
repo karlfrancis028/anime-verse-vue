@@ -1,6 +1,7 @@
 .nav {
   @extend %flex-row--center-y, %flex-row--between;
   height: 3.5rem;
+  width: 100%;
 
   &.container {
     position: relative;
