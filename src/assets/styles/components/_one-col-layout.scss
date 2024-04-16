@@ -1,7 +1,7 @@
 .one-col-layout {
   @extend %flex-col;
   gap: space(base);
-  padding: space(base) 0;
+  padding:  0 0 space(base) 0;
 
   &__content {
     @extend %flex-col;
