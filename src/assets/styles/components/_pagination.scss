@@ -2,7 +2,7 @@
   @extend %flex-row--center-xy;
   gap: space(s);
 
-  &__number {
+  &__container {
     @extend %flex-row--center-xy;
     --size: 32px;
     height: var(--size);
