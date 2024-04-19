@@ -17,6 +17,7 @@
   --body-color: hsl(var(--hue-color), 60%, 99%);
   --body-color-invert: hsl(var(--hue-color), 28%, 12%);
   --card-color: #e7e7e7;
+  --card-color-invert: hsl(var(--hue-color), 29%, 25%);
   --btn-color: #acacac;
   --input-color: rgb(221, 221, 221);
   --btn-color-hover: #b3b3b3;
@@ -70,6 +71,7 @@ body {
     --body-color: hsl(var(--hue-color), 28%, 12%);
     --body-color-invert: hsl(var(--hue-color), 60%, 99%);
     --card-color: hsl(var(--hue-color), 29%, 25%);
+    --card-color-invert: #e7e7e7;
     --btn-color: hsl(var(--hue-color), 29%, 50%);
     --input-color: hsl(var(--hue-color), 28%, 20%);
     --btn-color-hover: hsl(var(--hue-color), 29%, 60%);

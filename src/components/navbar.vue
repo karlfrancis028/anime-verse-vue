@@ -38,7 +38,7 @@
 
     if (route.query) {
       routeOptions.query = {
-        type: route.query.type,
+        ...route.query,
       };
     }
 
@@ -47,29 +47,10 @@
   };
 
   const isRouteActive = (route: Record<string, any>) => {
-    if ($route.fullPath.includes('type=')) return areObjectsEqual($route.query, route.query);
+    if (!route.query) return $route.path === route.path;
 
-    return $route.path === route.path;
+    return $route.query.type === route.query.type;
   };
-
-  const areObjectsEqual = (obj1: any, obj2: any) => {
-    if (!obj1 || !obj2) return false;
-
-    const keys1 = Object.keys(obj1);
-    const keys2 = Object.keys(obj2);
-
-    if (keys1.length !== keys2.length) {
-        return false;
-    }
-
-    for (const key of keys1) {
-      if (obj1[key] !== obj2[key]) {
-        return false;
-      }
-    }
-
-    return true;
-  }
 
   const navRoutes = [
     {
@@ -81,6 +62,7 @@
       path: '/view-all',
       query: {
         type: 'upcoming',
+        page: 1,
       },
     },
     {
@@ -88,6 +70,7 @@
       path: '/view-all',
       query: {
         type: 'popular',
+        page: 1,
       },
     },
   ];

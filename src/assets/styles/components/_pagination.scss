@@ -1,0 +1,19 @@
+.pagination {
+  @extend %flex-row--center-xy;
+  gap: space(s);
+
+  &__number {
+    @extend %flex-row--center-xy;
+    --size: 32px;
+    height: var(--size);
+    width: var(--size);
+    color: var(--title-color);
+    background-color: var(--card-color);
+    cursor: pointer;
+
+    &.active {
+      color: var(--title-color-invert);
+      background-color: var(--card-color-invert);
+    }
+  }
+}

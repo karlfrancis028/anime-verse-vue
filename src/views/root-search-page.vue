@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { useRoute } from 'vue-router';
+  import { useRoute, useRouter } from 'vue-router';
   import { computed, onMounted, ref, watch } from 'vue';
   import { useAnimeStore } from '@/stores/anime';
   import { storeToRefs } from 'pinia';
@@ -12,10 +12,12 @@
   const animeStore = useAnimeStore();
   const { animeGenres } = storeToRefs(animeStore);
   const $route = useRoute();
+  const $router = useRouter();
   const searchString = ref<string>('');
   const selectedGenre = ref<string>('');
   const animeList = ref<any[]>([]);
-  const pageNumber = ref<number>(1);
+  const paginationData = ref<any>({});
+  const pageNumber = ref<number>();
 
   const computedPageTitle = computed(() => {
     if (typeof $route.query.type !== 'string' || !$route.query.type) return '';
@@ -45,21 +47,44 @@
   }
 
   const fetchAnimeList = async () => {
+    loadingStore.toggleLoadingState(true);
     try {
       const { data } = await fetchDataFunction();
       if (data) {
         animeList.value = data.data;
+        paginationData.value = data.pagination;
       }
     } catch (error) {
       console.error(error);
+    } finally {
+      loadingStore.toggleLoadingState(false);
     }
   };
+
+  const updatePageQuery = () => {
+    $router.push({
+      query: {
+        ...$route.query,
+        page: pageNumber.value,
+      },
+    });
+  }
   
-  watch(() => $route.query.type, async () => await fetchAnimeList());
+  watch(() => $route.query.type, async () => {
+    await fetchAnimeList();
+    pageNumber.value = 1;
+    updatePageQuery();
+  });
+
+  watch(() => pageNumber.value, async () => {
+    await fetchAnimeList();
+    updatePageQuery();
+  });
 
   onMounted(async () => {
     await animeStore.fetchAnimeGenres();
     await fetchAnimeList();
+    pageNumber.value = Number($route.query.page);
   });
 </script>
 
@@ -86,6 +111,8 @@
                     :genres="item.genres"
                     :year="item.year"/>
     </section-list>
+    <pagination v-model="pageNumber"
+                :max-page="paginationData.last_visible_page"/>
   </one-col-layout>
 </template>
 

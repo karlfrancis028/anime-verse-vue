@@ -8,6 +8,7 @@ import SearchInput from './search-input.vue';
 import MySelect from './my-select.vue';
 import SectionList from './section-list.vue';
 import BlockingLoader from './blocking-loader.vue';
+import Pagination from './pagination.vue';
 
 export default {
   Navbar,
@@ -20,4 +21,5 @@ export default {
   MySelect,
   SectionList,
   BlockingLoader,
+  Pagination,
 }
