@@ -42,7 +42,7 @@
 
 <template>
   <one-col-layout :is-loading="loading"
-                  :show-nav="false"
+                  :show-back-btn="false"
                   class="landing" >
     <hero :image="HeroImage"
           :title="heroTitle"
