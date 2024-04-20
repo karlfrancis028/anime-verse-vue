@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { PhMagnifyingGlass } from '@phosphor-icons/vue';
   import { vMaska } from 'maska';
-  import { computed, reactive, useAttrs } from 'vue';
+  import { computed, reactive, ref, useAttrs } from 'vue';
 
   interface SearchInputProps {
     type?: string;
@@ -9,11 +9,13 @@
     placeholder?: string;
   }
 
+  
   const props = withDefaults(defineProps<SearchInputProps>(), {
     type: 'text',
     modelValue: '',
     placeholder: 'Search for an anime title...'
   });
+  const stringVal = ref<string>(props.modelValue || '');
   const attrs = useAttrs();
   const emit = defineEmits(['update:model-value']);
   const maskOptions = reactive({ 
@@ -34,7 +36,7 @@
 
     const target = ev.target as HTMLInputElement;
 
-    emit('update:model-value', target.value);
+    stringVal.value = target.value;
   };
 
   const handleKeydown = (ev: KeyboardEvent) => {
@@ -45,6 +47,8 @@
     }
   };
 
+  const submit = () => emit('update:model-value', stringVal.value);
+
 </script>
 
 <template>
@@ -54,7 +58,8 @@
            v-bind="attrs"
            v-maska:[maskOptions] 
            :value="modelValue"
-           :placeholder="placeholder"/>
-    <ph-magnifying-glass :size="24" />
+           :placeholder="placeholder"
+           @keyup.enter="submit"/>
+    <ph-magnifying-glass :size="24" weight="bold" @click="submit" />
   </div>
 </template>

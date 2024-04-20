@@ -52,7 +52,7 @@
          @click="choosePageNumber(modelValue && modelValue + 1)">
       <ph-caret-right :size="14" weight="bold" />
     </div>
-    <div v-if="maxPage && modelValue && maxPage - modelValue > 2" 
+    <div v-if="maxPage && modelValue && maxPage - modelValue >= 2" 
          class="pagination__container"
          @click="choosePageNumber(maxPage)">
       <ph-caret-double-right :size="14" weight="bold" />

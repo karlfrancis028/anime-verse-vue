@@ -14,7 +14,7 @@
   const $route = useRoute();
   const $router = useRouter();
   const searchString = ref<string>('');
-  const selectedGenre = ref<string>('');
+  const selectedGenre = ref<{[key:string]: any}>();
   const animeList = ref<any[]>([]);
   const paginationData = ref<any>({});
   const pageNumber = ref<number>();
@@ -31,18 +31,38 @@
   });
 
   const fetchDataFunction = async () => {
-    if ($route.query.type === 'upcoming') {
-      return await AnimeApi.fetchSeasonUpcomingAnimes({
-        unapproved: false,
-        sfw: true,
-        page: pageNumber.value,
-      });
+    if (searchString.value.trim().length > 0 || selectedGenre.value) {
+      let qParams: {[key: string]: any} = {};
+
+      if (searchString.value.trim().length > 0) {
+        qParams = {
+          ...qParams,
+          q: searchString.value,
+        }
+      }
+
+      if (selectedGenre.value) {
+        qParams = {
+          ...qParams,
+          genre: selectedGenre.value.mal_id,
+        };
+      }
+
+      return await AnimeApi.fetchAnimeByNameAndGenre(qParams);
     } else {
-      return await AnimeApi.fetchTopAnimes({
-        filter: TopAnimeFilters.AIRING,
-        sfw: true,
-        page: pageNumber.value,
-      });
+      if ($route.query.type === 'upcoming') {
+        return await AnimeApi.fetchSeasonUpcomingAnimes({
+          unapproved: false,
+          sfw: true,
+          page: pageNumber.value,
+        });
+      } else {
+        return await AnimeApi.fetchTopAnimes({
+          filter: TopAnimeFilters.AIRING,
+          sfw: true,
+          page: pageNumber.value,
+        });
+      }
     }
   }
 
@@ -81,6 +101,10 @@
     updatePageQuery();
   });
 
+  watch(() => searchString.value, async () => {
+    await fetchAnimeList();
+  });
+
   onMounted(async () => {
     await animeStore.fetchAnimeGenres();
     await fetchAnimeList();
@@ -96,10 +120,11 @@
         <h3 class="root-search-page__title">{{ computedPageTitle }}</h3>
         <div class="root-search-page__actions">
           <search-input v-model="searchString" />
-          <my-select v-model="selectedGenre" 
+          <!-- Commented out because no way to filter all animes using genre -->
+          <!-- <my-select v-model="selectedGenre" 
                      placeholder="All"
                      displayed-label="name"
-                     :options="animeGenres"/>
+                     :options="animeGenres"/> -->
         </div>
       </div>
     </template>

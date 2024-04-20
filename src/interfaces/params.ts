@@ -21,8 +21,13 @@ export interface SeasonUpcomingAnimeParams {
   unapproved?: boolean,
   page?: number,
   limit?: number,
-}
+};
 
 export interface AnimeGenreParams {
   filter?: AnimeGenreFilters,
-}
+};
+
+export interface BaseAnimeParams {
+  q?: string;
+  genre?: number;
+};

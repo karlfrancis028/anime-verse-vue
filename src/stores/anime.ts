@@ -1,5 +1,6 @@
 import type { 
   AnimeGenreParams,
+  BaseAnimeParams,
   SeasonUpcomingAnimeParams,
   TopAnimeParams 
 } from "@/interfaces/params";
@@ -56,6 +57,20 @@ export const useAnimeStore = defineStore('anime', () => {
     }
   };
 
+  const fetchAnimeByNameAndGenre = async (queryParams?: BaseAnimeParams) => {
+    toggleLoadingState(true);
+    try {
+      const { data } = await AnimeApi.fetchAnimeByNameAndGenre(queryParams);
+      if (data) {
+        return data.data;
+      }
+    } catch(error) {
+      console.error(error);
+    } finally {
+      toggleLoadingState(false);
+    }
+  };
+
   return {
     topAnimes,
     seasonUpcomingAnimes,
@@ -63,5 +78,6 @@ export const useAnimeStore = defineStore('anime', () => {
     fetchTopAnimes,
     fetchSeasonUpcomingAnimes,
     fetchAnimeGenres,
+    fetchAnimeByNameAndGenre,
   };
 });
