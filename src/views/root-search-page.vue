@@ -10,7 +10,7 @@
   const loadingStore = useLoadingStore();
   const { loading } = storeToRefs(loadingStore);
   const animeStore = useAnimeStore();
-  const { animeGenres } = storeToRefs(animeStore);
+  // const { animeGenres } = storeToRefs(animeStore);
   const $route = useRoute();
   const $router = useRouter();
   const searchString = ref<string>('');
@@ -106,7 +106,7 @@
   });
 
   onMounted(async () => {
-    await animeStore.fetchAnimeGenres();
+    // await animeStore.fetchAnimeGenres();
     await fetchAnimeList();
     pageNumber.value = Number($route.query.page);
   });

@@ -43,19 +43,19 @@ export const useAnimeStore = defineStore('anime', () => {
     }
   };
 
-  const fetchAnimeGenres = async (queryParams?: AnimeGenreParams) => {
-    toggleLoadingState(true);
-    try {
-      const { data } = await AnimeApi.fetchAnimeGenres(queryParams);
-      if (data) {
-        animeGenres.value = data.data;
-      }
-    } catch(error) {
-      console.error(error);
-    } finally {
-      toggleLoadingState(false);
-    }
-  };
+  // const fetchAnimeGenres = async (queryParams?: AnimeGenreParams) => {
+  //   toggleLoadingState(true);
+  //   try {
+  //     const { data } = await AnimeApi.fetchAnimeGenres(queryParams);
+  //     if (data) {
+  //       animeGenres.value = data.data;
+  //     }
+  //   } catch(error) {
+  //     console.error(error);
+  //   } finally {
+  //     toggleLoadingState(false);
+  //   }
+  // };
 
   const fetchAnimeByNameAndGenre = async (queryParams?: BaseAnimeParams) => {
     toggleLoadingState(true);
@@ -77,7 +77,7 @@ export const useAnimeStore = defineStore('anime', () => {
     animeGenres,
     fetchTopAnimes,
     fetchSeasonUpcomingAnimes,
-    fetchAnimeGenres,
+    // fetchAnimeGenres,
     fetchAnimeByNameAndGenre,
   };
 });
