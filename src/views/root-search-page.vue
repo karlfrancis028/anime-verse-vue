@@ -18,10 +18,17 @@
   const animeList = ref<any[]>([]);
   const paginationData = ref<any>({});
   const pageNumber = ref<number>();
+  const showNav = ref<boolean>(true);
+
+  const hasSearchString = computed(() => {
+    if (!searchString.value) return false;
+
+    return searchString.value.trim().length > 0;
+  });
 
   const computedPageTitle = computed(() => {
-    if (searchString.value.trim().length > 0) {
-      return `Animes with keyword ${searchString.value}`;
+    if (hasSearchString.value) {
+      return `You searched "${searchString.value}"`;
     } else {
       if (typeof $route.query.type !== 'string' || !$route.query.type) return '';
       
@@ -35,10 +42,10 @@
   });
 
   const fetchDataFunction = async () => {
-    if (searchString.value.trim().length > 0 || selectedGenre.value) {
+    if (hasSearchString.value || selectedGenre.value) {
       let qParams: {[key: string]: any} = {};
 
-      if (searchString.value.trim().length > 0) {
+      if (hasSearchString.value) {
         qParams = {
           ...qParams,
           q: searchString.value,
@@ -77,6 +84,10 @@
       if (data) {
         animeList.value = data.data;
         paginationData.value = data.pagination;
+
+        if (hasSearchString.value) {
+          showNav.value = false;
+        }
       }
     } catch (error) {
       console.error(error);
@@ -107,17 +118,25 @@
 
   watch(() => searchString.value, async () => {
     await fetchAnimeList();
+    $router.push({
+      query: {
+        ...$route.query,
+        q: searchString.value,
+      }
+    });
   });
 
   onMounted(async () => {
     // await animeStore.fetchAnimeGenres();
     await fetchAnimeList();
     pageNumber.value = Number($route.query.page);
+    searchString.value = $route.query.q as string;
   });
 </script>
 
 <template>
   <one-col-layout :is-loading="loading" 
+                  :show-nav="showNav"
                   class="root-search-page">
     <template #toolbar>
       <div class="root-search-page__toolbar">
