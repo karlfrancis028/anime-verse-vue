@@ -20,14 +20,18 @@
   const pageNumber = ref<number>();
 
   const computedPageTitle = computed(() => {
-    if (typeof $route.query.type !== 'string' || !$route.query.type) return '';
-    
-    const pageTitles: {[key: string]: any} = {
-      upcoming: 'Upcoming Animes',
-      popular: 'Popular Animes',
-    };
-
-    return pageTitles[$route.query.type];
+    if (searchString.value.trim().length > 0) {
+      return `Animes with keyword ${searchString.value}`;
+    } else {
+      if (typeof $route.query.type !== 'string' || !$route.query.type) return '';
+      
+      const pageTitles: {[key: string]: any} = {
+        upcoming: 'Upcoming Animes',
+        popular: 'Popular Animes',
+      };
+  
+      return pageTitles[$route.query.type];
+    }
   });
 
   const fetchDataFunction = async () => {
@@ -154,6 +158,7 @@
     &__title {
       color: var(--title-color);
       margin-left: space(xs);
+      text-transform: capitalize;
     }
 
     &__actions {
