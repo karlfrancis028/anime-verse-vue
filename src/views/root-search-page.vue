@@ -84,10 +84,6 @@
       if (data) {
         animeList.value = data.data;
         paginationData.value = data.pagination;
-
-        if (hasSearchString.value) {
-          showNav.value = false;
-        }
       }
     } catch (error) {
       console.error(error);
@@ -117,6 +113,11 @@
   });
 
   watch(() => searchString.value, async () => {
+    if (hasSearchString.value) {
+      showNav.value = false;
+    } else {
+      showNav.value = true;
+    }
     await fetchAnimeList();
     $router.push({
       query: {
