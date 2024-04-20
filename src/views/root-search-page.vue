@@ -13,7 +13,7 @@
   // const { animeGenres } = storeToRefs(animeStore);
   const $route = useRoute();
   const $router = useRouter();
-  const searchString = ref<string>(($route.query.q as string) || '');
+  const searchString = ref<string>('');
   const selectedGenre = ref<{[key:string]: any}>();
   const animeList = ref<any[]>([]);
   const paginationData = ref<any>({});
@@ -135,6 +135,7 @@
     // await animeStore.fetchAnimeGenres();
     await fetchAnimeList();
     pageNumber.value = Number($route.query.page);
+    searchString.value = $route.query.q as string;
   });
 </script>
 
