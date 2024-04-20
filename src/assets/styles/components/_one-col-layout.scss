@@ -7,6 +7,14 @@
     padding:  0 0 space(base) 0;
   }
 
+  &__back-btn {
+    @extend %flex-row--center-y;
+    gap: space(s);
+    color: var(--title-color);
+    font-weight: font(font-semi-bold);
+    cursor: pointer;
+  }
+
   &__content {
     @extend %flex-col;
     gap: space(base);

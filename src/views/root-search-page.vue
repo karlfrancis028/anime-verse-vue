@@ -13,7 +13,7 @@
   // const { animeGenres } = storeToRefs(animeStore);
   const $route = useRoute();
   const $router = useRouter();
-  const searchString = ref<string>('');
+  const searchString = ref<string>(($route.query.q as string) || '');
   const selectedGenre = ref<{[key:string]: any}>();
   const animeList = ref<any[]>([]);
   const paginationData = ref<any>({});
@@ -99,6 +99,10 @@
         page: pageNumber.value,
       },
     });
+  };
+
+  const resetFilter = () => {
+    searchString.value = '';
   }
   
   watch(() => $route.query.type, async () => {
@@ -131,14 +135,15 @@
     // await animeStore.fetchAnimeGenres();
     await fetchAnimeList();
     pageNumber.value = Number($route.query.page);
-    searchString.value = $route.query.q as string;
   });
 </script>
 
 <template>
   <one-col-layout :is-loading="loading" 
                   :show-nav="showNav"
-                  class="root-search-page">
+                  :show-back-btn="!showNav"
+                  class="root-search-page"
+                  @back-btn-action="resetFilter">
     <template #toolbar>
       <div class="root-search-page__toolbar">
         <h3 class="root-search-page__title">{{ computedPageTitle }}</h3>
