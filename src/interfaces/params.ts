@@ -27,7 +27,12 @@ export interface AnimeGenreParams {
   filter?: AnimeGenreFilters,
 };
 
-export interface BaseAnimeParams {
+export interface BaseAnimeParams extends SeasonUpcomingAnimeParams {
   q?: string;
   genre?: number;
 };
+
+export interface AnimeEpisodesParams {
+  id: number;
+  page: number;
+}

@@ -59,7 +59,10 @@
         };
       }
 
-      return await AnimeApi.fetchAnimeByNameAndGenre(qParams);
+      return await AnimeApi.fetchAnimeByNameAndGenre({
+        ...qParams,
+        sfw: true,
+      });
     } else {
       if ($route.query.type === 'upcoming') {
         return await AnimeApi.fetchSeasonUpcomingAnimes({
@@ -161,7 +164,7 @@
     <section-list>
       <section-item v-for="(item, index) in animeList" :key="index"
                     :image="item.images.jpg.image_url" 
-                    :title="item.title"
+                    :title="item.title_english || item.title"
                     :type="item.type"
                     :genres="item.genres"
                     :year="item.year"/>

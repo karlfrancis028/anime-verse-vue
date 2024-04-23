@@ -1,8 +1,10 @@
 import '@/assets/styles/main.scss';
 import Components from '@/components/index';
 
-import 'vue3-carousel/dist/carousel.css'
+import 'vue3-carousel/dist/carousel.css';
+import 'vue-plyr/dist/vue-plyr.css';
 import TruncateReadMore from 'vue-truncate-read-more';
+import VuePlyr from 'vue-plyr';
 import { Carousel, Slide } from 'vue3-carousel'
 
 import { createApp } from 'vue';
@@ -18,6 +20,7 @@ Object.keys(Components).forEach((key) => {
 });
 
 app.use(TruncateReadMore);
+app.use(VuePlyr);
 app.use(Carousel);
 app.use(Slide);
 

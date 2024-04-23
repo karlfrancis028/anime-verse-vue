@@ -1,11 +1,14 @@
 import axios from 'axios';
 import type { 
+  AnimeEpisodesParams,
   AnimeGenreParams,
   BaseAnimeParams,
   SeasonUpcomingAnimeParams,
   TopAnimeParams, 
 } from '@/interfaces/params';
-import type{ 
+import type { 
+  AnimeFullDataResponse,
+  AnimeEpisodesResponse,
   AnimeGenreResponse,
   SeasonUpcomingAnimeResponse,
   TopAnimeResponse, 
@@ -33,5 +36,15 @@ export const AnimeApi = {
     return await axios.get<AnimeGenreResponse>(`${ANIME_API}/genres/anime`, {
       params: queryParams,
     });
+  },
+  fetchAnimeEpisodes: async (queryParams: AnimeEpisodesParams) => {
+    return await axios.get<AnimeEpisodesResponse>(`${ANIME_API}/anime/${queryParams.id}/videos/episodes`, {
+      params: {
+        page: queryParams.page,
+      },
+    });
+  },
+  fetchAnimeFullData: async (anime_id: number) => {
+    return await axios.get<AnimeFullDataResponse>(`${ANIME_API}/anime/${anime_id}/full`);
   },
 };

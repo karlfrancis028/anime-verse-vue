@@ -10,6 +10,7 @@
   }
 
   const props = defineProps<SectionItemProps>();
+  const emit = defineEmits(['click']);
 
   const computedGenres = computed(() => {
     if (!props.genres?.length) return null;
@@ -24,10 +25,13 @@
     
     return infos.join(' ~ ');
   });
+
+  const handleClick = () => emit('click');
 </script>
 
 <template>
-  <div class="section-item">
+  <div class="section-item"
+       @click="handleClick">
     <img :src="image" alt="Section Item Image" class="section-item__image" />
     <div class="section-item__description">
       <p class="section-item__info">{{ infoDisplay }}</p>

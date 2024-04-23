@@ -1,4 +1,5 @@
 import type { 
+  AnimeEpisodesParams,
   AnimeGenreParams,
   BaseAnimeParams,
   SeasonUpcomingAnimeParams,
@@ -61,15 +62,22 @@ export const useAnimeStore = defineStore('anime', () => {
     toggleLoadingState(true);
     try {
       const { data } = await AnimeApi.fetchAnimeByNameAndGenre(queryParams);
-      if (data) {
-        return data.data;
-      }
+      if (data) return data.data;
     } catch(error) {
       console.error(error);
     } finally {
       toggleLoadingState(false);
     }
   };
+
+  const fetchAnimeEpisodes = async (queryParams: AnimeEpisodesParams) => {
+    try {
+      const { data } = await AnimeApi.fetchAnimeEpisodes(queryParams);
+      if (data) return data;
+    } catch(error) {
+      console.error(error);
+    }
+  }
 
   return {
     topAnimes,
@@ -79,5 +87,6 @@ export const useAnimeStore = defineStore('anime', () => {
     fetchSeasonUpcomingAnimes,
     // fetchAnimeGenres,
     fetchAnimeByNameAndGenre,
+    fetchAnimeEpisodes,
   };
 });

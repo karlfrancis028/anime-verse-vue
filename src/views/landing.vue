@@ -5,7 +5,10 @@
   import { storeToRefs } from 'pinia';
   import HeroImage from '@/assets/hero-image.jpg';
   import { useLoadingStore } from '@/stores/loading';
+  import { useRouter } from 'vue-router';
+  import { ROUTE_PARAMS } from '@/router';
 
+  const $router = useRouter();
   const loadingStore = useLoadingStore();
   const { loading } = storeToRefs(loadingStore);
   const animeStore = useAnimeStore();
@@ -30,6 +33,15 @@
     });
   };
 
+  const routeToEpisodes = (anime_id: number) => {
+    $router.push({
+      name: 'episodes',
+      params: {
+        [ROUTE_PARAMS.ANIME_ID]: anime_id,
+      }
+    })
+  };
+
   onMounted(async () => {
     await fetchTopTenAnimes();
     await fetchSeasonUpcomingAnimes();
@@ -52,20 +64,22 @@
                         :options="seasonUpcomingAnimes">
         <template v-slot:option="{option}">
           <section-item :image="option.images.jpg.image_url" 
-                        :title="option.title"
+                        :title="option.title_english || option.title"
                         :type="option.type"
                         :genres="option.genres"
-                        :year="option.year"/>
+                        :year="option.year"
+                        @click="routeToEpisodes(option.mal_id)"/>
         </template>
       </carousel-section>
       <carousel-section title="Most Popular"
                         :options="topAnimes">
         <template v-slot:option="{option}">
           <section-item :image="option.images.jpg.image_url" 
-                        :title="option.title"
+                        :title="option.title_english || option.title"
                         :type="option.type"
                         :genres="option.genres"
-                        :year="option.year"/>
+                        :year="option.year"
+                        @click="routeToEpisodes(option.mal_id)"/>
         </template>
       </carousel-section>
     </div>

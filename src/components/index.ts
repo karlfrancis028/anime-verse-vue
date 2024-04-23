@@ -9,6 +9,7 @@ import MySelect from './my-select.vue';
 import SectionList from './section-list.vue';
 import BlockingLoader from './blocking-loader.vue';
 import Pagination from './pagination.vue';
+import AnimeProfileSection from './anime-profile-section.vue';
 
 export default {
   Navbar,
@@ -22,4 +23,5 @@ export default {
   SectionList,
   BlockingLoader,
   Pagination,
+  AnimeProfileSection,
 }
