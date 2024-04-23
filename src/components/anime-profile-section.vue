@@ -1,5 +1,6 @@
 <script setup lang="ts">
   import { computed } from 'vue';
+  import { PhStar } from '@phosphor-icons/vue';
 
   const props = defineProps<{
     info: { [key: string]: any };
@@ -26,6 +27,14 @@
     const foundRatingValue = ratings[foundRatingKey];
 
     return foundRatingValue;
+  });
+
+  const formattedDuration = computed(() => {
+    if (!props.info.duration) return '';
+
+    const splitDuration = props.info.duration.split('per');
+
+    return splitDuration[0];
   });
 
   const formattedGenre = computed(() => {
@@ -78,9 +87,12 @@
       <h1 class="title">{{ info.title_english || info.title }}</h1>
       <div class="meta">
         <p class="rating">{{ formattedRating }}</p>
-        <p class="score">{{ info.score }}</p>
+        <div class="score">
+          <ph-star :size="12" weight="fill" />
+          <p>{{ info.score }}</p>
+        </div>
         <p class="year">{{ info.year }}</p>
-        <p class="duration">{{ info.duration }}</p>
+        <p class="duration">{{ formattedDuration }}</p>
       </div>
       <p class="description">{{ info.synopsis }}</p>
       <div class="details">
@@ -128,6 +140,11 @@
         @extend %flex-row--center-y;
         font-size: font(smaller-font-size);
         gap: space(s);
+
+        .score {
+          @extend %flex-row--center-y;
+          gap: 4px;
+        }
       }
 
       .description {
