@@ -18,7 +18,7 @@
     if (!props.info.rating) return '';
 
     const ratingsKey = Object.keys(ratings);
-    const ratingsIndex = ratingsKey.findIndex((rating) => props.info.rating.includes(rating));
+    const ratingsIndex = ratingsKey.findIndex((rating) => props.info.rating.includes(rating.toLowerCase()));
 
     if (ratingsIndex === -1) return '';
 
