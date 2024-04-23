@@ -19,7 +19,7 @@
 
   const fetchTopTenAnimes = async () => {
     await animeStore.fetchTopAnimes({
-      filter: TopAnimeFilters.AIRING,
+      filter: TopAnimeFilters.BYPOPULARITY,
       sfw: true,
       limit: 10,
     });
