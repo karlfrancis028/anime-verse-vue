@@ -19,7 +19,7 @@
     if (!props.info.rating) return '';
 
     const ratingsKey = Object.keys(ratings);
-    const ratingsIndex = ratingsKey.findIndex((rating) => props.info.rating.includes(rating.toLowerCase()));
+    const ratingsIndex = ratingsKey.findIndex((rating) => props.info.rating.toLowerCase().includes(rating.toLowerCase()));
 
     if (ratingsIndex === -1) return '';
 
@@ -86,7 +86,7 @@
     <div class="anime-profile-section__info">
       <h1 class="title">{{ info.title_english || info.title }}</h1>
       <div class="meta">
-        <p v-if="formattedRating" class="rating">{{ formattedRating }}</p>
+        <p v-if="formattedRating" class="rating pill-container">{{ formattedRating }}</p>
         <div v-if="info.score" class="score">
           <ph-star :size="12" weight="fill" />
           <p>{{ info.score }}</p>

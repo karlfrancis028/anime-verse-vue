@@ -88,3 +88,11 @@ body {
     align-items: flex-start;
   }
 }
+
+.pill-container {
+  @extend %flex-row--center-xy;
+  background-color: var(--card-color);
+  color: var(--title-color);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
