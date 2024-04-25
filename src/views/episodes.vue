@@ -3,11 +3,12 @@
   import { AnimeApi } from '@/services/anime';
   import { useAnimeStore } from '@/stores/anime';
   import { useLoadingStore } from '@/stores/loading';
+  import { storeToRefs } from 'pinia';
   import { onMounted, ref } from 'vue';
   import { useRoute } from 'vue-router';
 
   const loadingStore = useLoadingStore();
-  const { loading } = loadingStore;
+  const { loading } = storeToRefs(loadingStore);
   const animeStore = useAnimeStore();
   const animeEpisodes = ref<any[]>([]);
   const $route = useRoute();
@@ -31,6 +32,7 @@
   };
 
   const fetchAnimeData = async (anime_id: number) => {
+    loadingStore.toggleLoadingState(true);
     try {
       const { data } = await AnimeApi.fetchAnimeFullData(anime_id);
   
@@ -39,15 +41,15 @@
       }
     } catch(error) {
       console.error(error);
+    } finally {
+      loadingStore.toggleLoadingState(false);
     }
   };
 
   onMounted(async () => {
-    loadingStore.toggleLoadingState(true);
     await fetchAnimeEpisodes(Number($route.params[ROUTE_PARAMS.ANIME_ID]));
     await fetchAnimeData(Number($route.params[ROUTE_PARAMS.ANIME_ID]));
     selectedAnimeEpisode.value = animeEpisodes.value[0];
-    loadingStore.toggleLoadingState(false);
   });
 </script>
 

@@ -71,11 +71,14 @@ export const useAnimeStore = defineStore('anime', () => {
   };
 
   const fetchAnimeEpisodes = async (queryParams: AnimeEpisodesParams) => {
+    toggleLoadingState(true);
     try {
       const { data } = await AnimeApi.fetchAnimeEpisodes(queryParams);
       if (data) return data;
     } catch(error) {
       console.error(error);
+    } finally {
+      toggleLoadingState(false);
     }
   }
 
