@@ -30,7 +30,7 @@
   });
 
   const formattedDuration = computed(() => {
-    if (!props.info.duration) return '';
+    if (!props.info.duration) return '?';
 
     const splitDuration = props.info.duration.split('per');
 
@@ -86,13 +86,13 @@
     <div class="anime-profile-section__info">
       <h1 class="title">{{ info.title_english || info.title }}</h1>
       <div class="meta">
-        <p class="rating">{{ formattedRating }}</p>
-        <div class="score">
+        <p v-if="formattedRating" class="rating">{{ formattedRating }}</p>
+        <div v-if="info.score" class="score">
           <ph-star :size="12" weight="fill" />
           <p>{{ info.score }}</p>
         </div>
-        <p class="year">{{ info.year }}</p>
-        <p class="duration">{{ formattedDuration }}</p>
+        <p v-if="info.year" class="year">{{ info.year }}</p>
+        <p v-if="formattedDuration" class="duration">{{ formattedDuration }}</p>
       </div>
       <p class="description">{{ info.synopsis }}</p>
       <div class="details">

@@ -6,6 +6,7 @@
   import { TopAnimeFilters } from '@/references';
   import { AnimeApi } from '@/services/anime';
   import { useLoadingStore } from '@/stores/loading';
+  import { useAnimeComposable } from '@/composables/anime';
 
   const loadingStore = useLoadingStore();
   const { loading } = storeToRefs(loadingStore);
@@ -13,6 +14,7 @@
   // const { animeGenres } = storeToRefs(animeStore);
   const $route = useRoute();
   const $router = useRouter();
+  const { routeToEpisodes } = useAnimeComposable();
   const searchString = ref<string>('');
   const selectedGenre = ref<{[key:string]: any}>();
   const animeList = ref<any[]>([]);
@@ -72,7 +74,7 @@
         });
       } else {
         return await AnimeApi.fetchTopAnimes({
-          filter: TopAnimeFilters.AIRING,
+          filter: TopAnimeFilters.BYPOPULARITY,
           sfw: true,
           page: pageNumber.value,
         });
@@ -167,7 +169,8 @@
                     :title="item.title_english || item.title"
                     :type="item.type"
                     :genres="item.genres"
-                    :year="item.year"/>
+                    :year="item.year"
+                    @click="routeToEpisodes(item.mal_id)"/>
     </section-list>
     <pagination v-model="pageNumber"
                 :max-page="paginationData.last_visible_page"/>

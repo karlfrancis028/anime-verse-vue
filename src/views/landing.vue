@@ -6,7 +6,7 @@
   import HeroImage from '@/assets/hero-image.jpg';
   import { useLoadingStore } from '@/stores/loading';
   import { useRouter } from 'vue-router';
-  import { ROUTE_PARAMS } from '@/router';
+  import { useAnimeComposable } from '@/composables/anime';
 
   const $router = useRouter();
   const loadingStore = useLoadingStore();
@@ -16,6 +16,7 @@
     topAnimes,
     seasonUpcomingAnimes,
   } = storeToRefs(animeStore);
+  const { routeToEpisodes } = useAnimeComposable();
 
   const fetchTopTenAnimes = async () => {
     await animeStore.fetchTopAnimes({
@@ -31,15 +32,6 @@
       sfw: true,
       limit: 10,
     });
-  };
-
-  const routeToEpisodes = (anime_id: number) => {
-    $router.push({
-      name: 'episodes',
-      params: {
-        [ROUTE_PARAMS.ANIME_ID]: anime_id,
-      }
-    })
   };
 
   onMounted(async () => {
