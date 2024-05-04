@@ -76,6 +76,8 @@
     <div class="episodes__anime-info">
       <anime-profile-section v-if="animeProfile"
                              :info="animeProfile" />
+      <anime-episode-list v-if="animeEpisodes"
+                          :options="animeEpisodes"/>
     </div>
   </one-col-layout>
 </template>
@@ -88,6 +90,22 @@
 
     &__anime-info {
       @extend %flex-row;
+      gap: space(m);
+      height: 330px;
+
+      @media only screen and (max-width: 1024px) {
+        flex-direction: column;
+        height: unset;
+      }
+
+      .anime-profile-section {
+        flex-basis: 70%;
+      }
+
+      .anime-episode-list {
+        height: inherit;
+        flex: 1;
+      }
     }
   }
 </style>
