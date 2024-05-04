@@ -36,3 +36,8 @@ export interface AnimeEpisodesParams {
   id: number;
   page: number;
 }
+
+export interface AnimeEpisodeByIdParams {
+  id: number;
+  episodeId: number;
+}

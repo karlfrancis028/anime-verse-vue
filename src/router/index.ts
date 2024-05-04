@@ -6,6 +6,7 @@ import Error from '@/views/error.vue';
 
 export const ROUTE_PARAMS = {
   ANIME_ID: 'anime_id',
+  ANIME_EPISODE_ID: 'episode_id',
 };
 
 const router = createRouter({

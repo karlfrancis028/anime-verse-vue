@@ -1,6 +1,8 @@
 <script setup lang="ts">
-  defineProps<{
+
+  const props = defineProps<{
     options: any[];
+    activeEpisodeId: number;
   }>();
   
   const emit = defineEmits(['click']);
@@ -13,9 +15,17 @@
     return displayedText;
   };
 
+  const isEpisodeActive = (option: { [key: string]: any }) => {
+    if (!option.mal_id) return '';
+
+    return option.mal_id === props.activeEpisodeId
+      ? 'active'
+      : '';
+  };
+
   const handleClick = (option: { [key: string]: any }) => {
     emit('click', option);
-  }
+  };
 </script>
 
 <template>
@@ -24,6 +34,7 @@
     <div class="anime-episode-list__episodes">
       <div v-for="(option, index) in options" :key="index" 
            class="anime-episode-list__episode"
+           :class="isEpisodeActive(option)"
            @click="handleClick(option)">
         <p>{{ displayedEpisodeText(option) }}</p>
       </div>
@@ -68,7 +79,9 @@
     }
 
     &__episode {
+      cursor: pointer;
 
+      &.active,
       &:hover {
         background-color: var(--body-color-invert) !important;
         color: var(--title-color-invert);

@@ -18,3 +18,7 @@ export interface AnimeEpisodesResponse extends TopAnimeResponse {
 export interface AnimeFullDataResponse {
   data: { [key:string]: any };
 }
+
+export interface AnimeEpisodeByIdResponse extends AnimeFullDataResponse {
+  
+}

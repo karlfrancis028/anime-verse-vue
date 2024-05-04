@@ -4,7 +4,7 @@
   import { useAnimeStore } from '@/stores/anime';
   import { useLoadingStore } from '@/stores/loading';
   import { storeToRefs } from 'pinia';
-  import { onMounted, ref } from 'vue';
+  import { onMounted, ref, watch } from 'vue';
   import { useRoute } from 'vue-router';
 
   const loadingStore = useLoadingStore();
@@ -46,10 +46,38 @@
     }
   };
 
+  const routeToEpisode = async (option: { [key: string]: any }) => {
+    const animeId = Number($route.params[ROUTE_PARAMS.ANIME_ID]);
+
+    if(!animeId) return;
+
+    loadingStore.toggleLoadingState(true);
+    try {
+      const { data } = await AnimeApi.fetchAnimeEpisodeById({
+        id: animeId,
+        episodeId: option.mal_id,
+      });
+
+      if (data) {
+        selectedAnimeEpisode.value = data.data;
+      }
+    } catch(error) {
+      console.error(error);
+    } finally {
+      loadingStore.toggleLoadingState(false);
+    }
+  };
+
+  watch(() => selectedAnimeEpisode.value, (newVal: any) => {
+    $route.query[ROUTE_PARAMS.ANIME_EPISODE_ID] = newVal.mal_id;
+  });
+
   onMounted(async () => {
     await fetchAnimeEpisodes(Number($route.params[ROUTE_PARAMS.ANIME_ID]));
     await fetchAnimeData(Number($route.params[ROUTE_PARAMS.ANIME_ID]));
-    selectedAnimeEpisode.value = animeEpisodes.value[0];
+    if (!selectedAnimeEpisode.value) {
+      selectedAnimeEpisode.value = animeEpisodes.value[0];
+    }
   });
 </script>
 
@@ -76,8 +104,10 @@
     <div class="episodes__anime-info">
       <anime-profile-section v-if="animeProfile"
                              :info="animeProfile" />
-      <anime-episode-list v-if="animeEpisodes"
-                          :options="animeEpisodes"/>
+      <anime-episode-list v-if="animeEpisodes && selectedAnimeEpisode"
+                          :options="animeEpisodes"
+                          :active-episode-id="selectedAnimeEpisode.mal_id"
+                          @click="routeToEpisode"/>
     </div>
   </one-col-layout>
 </template>
