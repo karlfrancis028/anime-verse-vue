@@ -114,8 +114,12 @@
     flex-wrap: nowrap;
     gap: space(m);
 
+    @media only screen and (max-width: 680px) {
+      flex-direction: column;
+    }
+
     &__img {
-      flex-basis: 400px;
+      max-width: 400px;
       
       img {
         border-radius: 8px;
