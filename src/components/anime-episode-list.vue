@@ -1,4 +1,5 @@
 <script setup lang="ts">
+  import { computed, onMounted } from 'vue';
 
   const props = defineProps<{
     options: any[];
@@ -6,6 +7,29 @@
   }>();
   
   const emit = defineEmits(['click']);
+
+  const calculateEpisodeHeight = computed(() => {
+    const firstEpisode = document.querySelector('.anime-episode-list__episode');
+
+    if (!firstEpisode) return 50;
+
+    return firstEpisode.getBoundingClientRect().height;
+  });
+
+  const scrollToActiveEpisode = () => {
+    const episodeHeight = calculateEpisodeHeight.value;
+    const activeIndex = props.options.findIndex(option => option.mal_id === props.activeEpisodeId);
+    const scrollTo = activeIndex * episodeHeight;
+
+    const container = document.querySelector('.anime-episode-list__episodes');
+
+    if (container) {
+      container.scrollTo({
+        top: scrollTo,
+        behavior: 'auto',
+      });
+    }
+  }
 
   const displayedEpisodeText = (option: { [key: string]: any }) => {
     if (!(option.title && option.episode)) return '';
@@ -26,6 +50,8 @@
   const handleClick = (option: { [key: string]: any }) => {
     emit('click', option);
   };
+
+  onMounted(() => scrollToActiveEpisode());
 </script>
 
 <template>
