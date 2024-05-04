@@ -81,6 +81,10 @@
     &__episode {
       cursor: pointer;
 
+      &.active {
+        pointer-events: none;
+      }
+
       &.active,
       &:hover {
         background-color: var(--body-color-invert) !important;
