@@ -82,7 +82,7 @@
 
       @media only screen and (max-width: 1024px) {
         text-align: left;
-        margin-left: space(base);
+        padding-left: space(base);
       }
     }
 
