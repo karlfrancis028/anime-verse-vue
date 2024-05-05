@@ -69,7 +69,9 @@
   };
 
   watch(() => selectedAnimeEpisode.value, (newVal: any) => {
-    $route.query[ROUTE_PARAMS.ANIME_EPISODE_ID] = newVal.mal_id;
+    if (newVal) {
+      $route.query[ROUTE_PARAMS.ANIME_EPISODE_ID] = newVal.mal_id;
+    }
   });
 
   onMounted(async () => {
